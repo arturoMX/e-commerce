@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 
 const NavItem = ({to, children, activeStyle}) => {
     NavItem.propTypes = {
-        to: PropTypes.node.isRequired,
-        children: PropTypes.node.isRequired,
-        activeStyle: PropTypes.string.isRequired,
+        to: PropTypes.node,
+        children: PropTypes.node,
+        activeStyle: PropTypes.string
     }
     return (
         <NavLink 
