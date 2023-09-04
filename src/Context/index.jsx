@@ -5,7 +5,7 @@ export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
     ShoppingCartProvider.propTypes = {
-        children: PropTypes.node.isRequired
+        children: PropTypes.node
     }
 
     const [count, setCount] = useState(0);
