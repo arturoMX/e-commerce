@@ -8,15 +8,19 @@ export const ShoppingCartProvider = ({ children }) => {
         children: PropTypes.node
     }
 
+    // Shopping Cart . Increment quantity
     const [count, setCount] = useState(0)
-    const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
 
+    // Product Detail . Open/Close
+    const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
     const openProductDetail= () => setIsProductDetailOpen(true)
     const closeProductDetail= () => setIsProductDetailOpen(false)
-
     // const increment = () => {
-    //     setCount(count + 1);
+        //     setCount(count + 1);
     // }
+    
+    // Product Detail . Show Product
+    const [productToShow, setProductToShow] = useState({})
 
     return (
         <ShoppingCartContext.Provider value={{
@@ -24,7 +28,9 @@ export const ShoppingCartProvider = ({ children }) => {
             setCount,
             openProductDetail,
             closeProductDetail,
-            isProductDetailOpen
+            isProductDetailOpen,
+            productToShow,
+            setProductToShow
         }}>
             {children}
         </ShoppingCartContext.Provider>
