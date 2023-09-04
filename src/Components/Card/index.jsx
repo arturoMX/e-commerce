@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { PlusIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context' 
 
+
 const Card = ({price, title, description, images, category: {name}}) => {
     Card.propTypes = {
         price: PropTypes.number,
@@ -12,27 +13,38 @@ const Card = ({price, title, description, images, category: {name}}) => {
         category: PropTypes.object,
     }
 
-    const {count, setCount, openProductDetail, setProductToShow} = useContext(ShoppingCartContext)
+    const data = {price, title, description, images, category: {name}}
 
-    const showProduct = ({price, title, description, images, category: {name}}) => {
-        openProductDetail();
-        setProductToShow({price, title, description, images, category: {name}});
+    const {count, setCount, openProductDetail, closeProductDetail, setProductToShow, cartProducts, setCartProducts, openCheckoutSideMenu,closeCheckoutSideMenu} = useContext(ShoppingCartContext)
+
+    const showProduct = (data) => {
+        openProductDetail()
+        setProductToShow(data)
+        closeCheckoutSideMenu()
+    }
+
+    const addProductToCart = (e, data) =>{
+        // Function for avoid the spread of event
+        e.stopPropagation()
+        setCount(count + 1)
+        setCartProducts([...cartProducts, data])
+        openCheckoutSideMenu()
+        closeProductDetail()
+
     }
     
     return (
         <div 
             className="bg-white cursor-pointer w-56 h-60 rounded-lg shadow-md"
-            onClick={() => {showProduct({price, title, description, images, category: {name}})}}>
+            onClick={() => {showProduct(data)}}>
             <figure className="relative mb-2 w-full h-4/5">
                 <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{name}</span>
                 <img className="w-full h-full object-cover rounded-lg" src={images[0]} alt="heacphnoes" />
                 <button 
                 className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2"
                 onClick={(e) =>  
-                    // Function for avoid the spread of event
-                    {e.stopPropagation()
-                    setCount(count + 1)}}>
-                    <PlusIcon className='w-6 h-6 text-black'/>
+                    {addProductToCart(e,data)}}>
+                    <PlusIcon className='w-6 h-6 text-black' />
                 </button>
             </figure>
             <p className="flex justify-between mx-2">

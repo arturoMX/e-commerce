@@ -25,7 +25,7 @@ const ProductDetail = () => {
             </div>
             <figure className='px-6'>
                 <img className='w-full h-full rounded-lg' 
-                src={productToShow.images ? productToShow.images[0]: ""} 
+                src={productToShow.images ? productToShow.images?.[0]: ""} 
                 alt={productToShow.title} />
                 {/* <ChevronRightIcon 
                 className={`${productToShow.images.length==1 ? 'hidden' : ""} w-8 h-8 fill-white cursor-pointer right-5 center-element`}
