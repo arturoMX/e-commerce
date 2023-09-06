@@ -26,7 +26,21 @@ export const ShoppingCartProvider = ({ children }) => {
 
     // Shopping Cart · Add Products To Cart
     const [cartProducts, setCartProducts] = useState([])
-        
+
+    // const onAdd = product => {
+    //     // Verific if the product is add in the cart
+    //     const productExists = cartProducts.some(el => el.id === product.id)
+    //     if (productExists) {
+    //         // Valid existence
+    //         const productCart = cartProducts.find(el => el.id === product.id) //Search the product
+    //         productCart.quantity += 1; // Increment in 1 
+    //     } else {
+    //         product.quantity = 1; // If the product don't exist, add the quantity property with valor 1
+    //         setCartProducts([...cartProducts, product])
+    //     }
+    //     setCount(count + 1)
+    // }
+
         return (
         <ShoppingCartContext.Provider value={{
             count,

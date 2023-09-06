@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types'
 import { useContext } from 'react'
-import { PlusIcon } from '@heroicons/react/24/solid'
+import { PlusIcon, CheckIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context' 
 
 
-const Card = ({price, title, description, images, category: {name}}) => {
+const Card = ({id, price, title, description, images, category: {name}}) => {
     Card.propTypes = {
+        id: PropTypes.number,
         price: PropTypes.number,
         title: PropTypes.string,
         description: PropTypes.string,
@@ -13,7 +14,7 @@ const Card = ({price, title, description, images, category: {name}}) => {
         category: PropTypes.object,
     }
 
-    const data = {price, title, description, images, category: {name}}
+    const data = {id, price, title, description, images, category: {name}}
 
     const {count, setCount, openProductDetail, closeProductDetail, setProductToShow, cartProducts, setCartProducts, openCheckoutSideMenu,closeCheckoutSideMenu} = useContext(ShoppingCartContext)
 
@@ -30,8 +31,42 @@ const Card = ({price, title, description, images, category: {name}}) => {
         setCartProducts([...cartProducts, data])
         openCheckoutSideMenu()
         closeProductDetail()
-
     }
+
+    const renderIcon = (id) => {
+        const isInCart = cartProducts.filter(product => product.id === id).length > 0
+        return (
+            isInCart ? (
+                <button className="absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2"
+                onClick={(e) =>  
+                    {e.stopPropagation()}}>
+                    <CheckIcon className='w-6 h-6 text-white' />
+                </button>
+            ) : (
+                <button 
+                className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2"
+                onClick={(e) =>  
+                    {addProductToCart(e,data)}}>
+                    <PlusIcon className='w-6 h-6 text-black' />
+                </button>
+            )
+        )
+    }
+    
+    // const addProduct = payload => {
+    //     const productIndex = cart.findIndex(product => product.id === payload.id)
+    //     let newCart = []
+    //     if (productIndex >= 0) {
+    //       newCart = [...cart]
+    //       newCart[productIndex].quantity++
+    //       newCart[productIndex].price = payload.price + newCart[productIndex].price
+    //     } else {
+    //       newCart = [...cart, { ...payload, quantity: 1 }]
+    //     }
+    //     setCart(newCart)
+    //     getTotalInfo(newCart)
+    //     openCheckoutSideMenu()
+    //   }
     
     return (
         <div 
@@ -40,12 +75,7 @@ const Card = ({price, title, description, images, category: {name}}) => {
             <figure className="relative mb-2 w-full h-4/5">
                 <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{name}</span>
                 <img className="w-full h-full object-cover rounded-lg" src={images[0]} alt="heacphnoes" />
-                <button 
-                className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2"
-                onClick={(e) =>  
-                    {addProductToCart(e,data)}}>
-                    <PlusIcon className='w-6 h-6 text-black' />
-                </button>
+                {renderIcon(data.id)}
             </figure>
             <p className="flex justify-between mx-2">
                 <span className="text-sm font-light">{title}</span>                
