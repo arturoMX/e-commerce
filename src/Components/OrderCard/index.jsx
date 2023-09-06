@@ -1,4 +1,4 @@
-import { PropTypes } from "prop-types"
+import { PropTypes } from 'prop-types'
 import { TrashIcon } from '@heroicons/react/24/solid'
 
 const OrderCard = ({ title, images, price }) => {
