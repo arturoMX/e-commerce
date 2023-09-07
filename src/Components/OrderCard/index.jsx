@@ -1,11 +1,13 @@
 import { PropTypes } from 'prop-types'
 import { TrashIcon } from '@heroicons/react/24/solid'
 
-const OrderCard = ({ title, images, price }) => {
+const OrderCard = ({id, title, images, price, handleDelete }) => {
     OrderCard.propTypes = {
+        id: PropTypes.number,
         title: PropTypes.string,
         images: PropTypes.array,
         price: PropTypes.number,
+        handleDelete: PropTypes
     }
 
     return (
@@ -19,7 +21,9 @@ const OrderCard = ({ title, images, price }) => {
             </div>
             <div className='flex items-center gap-2'>
                 <p className='text-md font-medium'>{price}</p>
-                <TrashIcon  className='w-6 h-6 text-black cursor-pointer'/>
+                <TrashIcon
+                  onClick={() => handleDelete(id)}
+                  className='w-6 h-6 text-black cursor-pointer'/>
             </div>
         </div>
     )
