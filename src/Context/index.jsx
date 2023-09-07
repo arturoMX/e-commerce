@@ -26,6 +26,10 @@ export const ShoppingCartProvider = ({ children }) => {
 
     // Shopping Cart · Add Products To Cart
     const [cartProducts, setCartProducts] = useState([])
+    
+    // Shopping Cart · Order
+    const [order, setOrder] = useState([])
+
 
     // const onAdd = product => {
     //     // Verific if the product is add in the cart
@@ -56,6 +60,8 @@ export const ShoppingCartProvider = ({ children }) => {
             setIsCheckoutSideMenuOpen,
             openCheckoutSideMenu,
             closeCheckoutSideMenu,
+            order,
+            setOrder,
         }}>
             {children}
         </ShoppingCartContext.Provider>

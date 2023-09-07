@@ -16,7 +16,7 @@ const Card = ({id, price, title, description, images, category: {name}}) => {
 
     const data = {id, price, title, description, images, category: {name}}
 
-    const {count, setCount, openProductDetail, closeProductDetail, setProductToShow, cartProducts, setCartProducts, openCheckoutSideMenu,closeCheckoutSideMenu} = useContext(ShoppingCartContext)
+    const {openProductDetail, closeProductDetail, setProductToShow, cartProducts, setCartProducts, openCheckoutSideMenu,closeCheckoutSideMenu} = useContext(ShoppingCartContext)
 
     const showProduct = (data) => {
         openProductDetail()
@@ -27,7 +27,7 @@ const Card = ({id, price, title, description, images, category: {name}}) => {
     const addProductToCart = (e, data) =>{
         // Function for avoid the spread of event
         e.stopPropagation()
-        setCount(count + 1)
+        // setCount(count + 1)
         setCartProducts([...cartProducts, data])
         openCheckoutSideMenu()
         closeProductDetail()
