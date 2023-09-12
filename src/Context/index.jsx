@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types'
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
+import { apiUrl } from '../API';
 
 export const ShoppingCartContext = createContext();
 
@@ -29,6 +30,30 @@ export const ShoppingCartProvider = ({ children }) => {
     
     // Shopping Cart · Order
     const [order, setOrder] = useState([])
+
+    // Get products
+    const [items, setItems] = useState(null);
+    const [filteredItems, setFilteredItems] = useState(null);
+
+    // Get products by title
+    const [searchByTitle, setSearchByTitle] = useState('');
+
+    // Get products by category
+    const [searchByCategory, setSearchByCategory] = useState('');
+
+    useEffect(() => {
+        fetch(`${apiUrl}/products`)
+          .then(response => response.json())
+          .then(data => setItems(data))
+      }, [])
+
+      const filteredItemByTitle = (items, searchByTitle) => {
+        return  items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+      } 
+
+      useEffect(() => {
+        if(searchByTitle) setFilteredItems(filteredItemByTitle(items, searchByTitle))
+      }, [items, searchByTitle])
 
 
     // const onAdd = product => {
@@ -62,6 +87,13 @@ export const ShoppingCartProvider = ({ children }) => {
             closeCheckoutSideMenu,
             order,
             setOrder,
+            items,
+            setItems,
+            searchByTitle,
+            setSearchByTitle,
+            filteredItems,
+            searchByCategory,
+            setSearchByCategory
         }}>
             {children}
         </ShoppingCartContext.Provider>
