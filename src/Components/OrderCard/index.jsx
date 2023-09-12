@@ -7,7 +7,7 @@ const OrderCard = ({id, title, images, price, handleDelete }) => {
         title: PropTypes.string,
         images: PropTypes.array,
         price: PropTypes.number,
-        handleDelete: PropTypes
+        handleDelete: PropTypes.func,
     }
 
     return (
@@ -21,9 +21,11 @@ const OrderCard = ({id, title, images, price, handleDelete }) => {
             </div>
             <div className='flex items-center gap-2'>
                 <p className='text-md font-medium'>{price}</p>
-                <TrashIcon
-                  onClick={() => handleDelete(id)}
-                  className='w-6 h-6 text-black cursor-pointer'/>
+                {
+                    handleDelete && <TrashIcon
+                    onClick={() => handleDelete(id)}
+                    className='w-6 h-6 text-black cursor-pointer'/>
+                }
             </div>
         </div>
     )
