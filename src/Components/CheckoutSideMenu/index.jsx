@@ -12,6 +12,7 @@ const CheckoutSideMenu = () => {
 
     const handleDelete = (id) => {
         const filteredProducts = cartProducts.filter(product => product.id != id)
+        console.log('filteredProducts', filteredProducts);
         setCartProducts(filteredProducts)
     }
 
