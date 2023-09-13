@@ -5,28 +5,16 @@ import { ShoppingCartContext } from "../../Context";
 
 function Home() {
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`${apiUrl}/products`)
-  //       const data = await response.json()
-  //       setItems(data)
-  //     } catch (error) {
-  //       console.error(`Oh no, ocurrió un error: ${error}`);
-  //     }
-  //   }
-  //   fetchData()
-  // }, [])
-
-  const { items, searchByTitle, setSearchByTitle, filteredItems } = useContext(ShoppingCartContext)
-
+  const { setSearchByTitle, filteredItems } = useContext(ShoppingCartContext)
+  
   const renderView = () => {
-    const itemsToRender = searchByTitle?.length > 0 ? filteredItems : items
-    if (itemsToRender?.length > 0) {
-      return itemsToRender.map(item => (
-        // Destructuración
-        <Card key={item.id} {...item} />
-      ))
+    if (filteredItems?.length > 0) {
+      return (
+        filteredItems?.map(item => (
+          // Destructuración
+          <Card key={item.id} {...item} />
+        ))
+      )
     } else {
       return <p>No results found</p>
     }

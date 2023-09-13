@@ -5,8 +5,6 @@ import { OrdersCard} from '../../Components/OrdersCard'
 
 function MyOrders() {
   const { order } = useContext(ShoppingCartContext)
-  console.log(order);
-
 
   return (
     <div>

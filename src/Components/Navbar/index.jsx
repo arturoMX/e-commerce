@@ -5,7 +5,7 @@ import { ShoppingCartContext } from '../../Context'
 
 
 const Navbar = () => {
-    const { count, cartProducts } = useContext(ShoppingCartContext)
+    const { cartProducts, setSearchByCategory } = useContext(ShoppingCartContext)
     const activeStyle = 'underline underline-offset-4'
     return (
         <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light">
@@ -16,32 +16,32 @@ const Navbar = () => {
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to='/' activeStyle={activeStyle}>
+                    <NavItem to='/' onClick={() => setSearchByCategory()} activeStyle={activeStyle}>
                         All
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to='/clothes' activeStyle={activeStyle}>
+                    <NavItem to='/clothes' onClick={() => setSearchByCategory('clothes')} activeStyle={activeStyle}>
                         Clothes
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to='/electronics' activeStyle={activeStyle}>
+                    <NavItem to='/electronics' onClick={() => setSearchByCategory('electronics')} activeStyle={activeStyle}>
                         Electronics
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to='/furnitures' activeStyle={activeStyle}>
+                    <NavItem to='/furnitures' onClick={() => setSearchByCategory('furnitures')} activeStyle={activeStyle}>
                         Furnitures
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to='/toys' activeStyle={activeStyle}>
+                    <NavItem to='/toys' onClick={() => setSearchByCategory('toys')} activeStyle={activeStyle}>
                         Toys
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to='/others' activeStyle={activeStyle}>
+                    <NavItem to='/others' onClick={() => setSearchByCategory('others')} activeStyle={activeStyle}>
                         Others
                     </NavItem>
                 </li>
